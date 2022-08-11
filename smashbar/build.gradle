@@ -31,6 +31,20 @@ repositories {
     google()
 }
 
+afterEvaluate {
+    publishing {
+        publications {
+            // Creates a Maven publication called "release".
+            release(MavenPublication) {
+                from components.release
+                groupId = 'com.github.Mobiel-Bekeken'
+                artifactId = 'LiveSmashBar'
+                version = '1.0.2'
+            }
+        }
+    }
+}
+
 tasks.withType(Javadoc).all {
     enabled = false
 }
