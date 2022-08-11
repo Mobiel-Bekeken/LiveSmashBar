@@ -10,7 +10,7 @@ import android.graphics.drawable.Drawable
 import android.os.Build
 import android.os.Build.VERSION.SDK_INT
 import android.os.Build.VERSION_CODES.M
-import android.support.annotation.ColorInt
+import androidx.annotation.ColorInt
 import android.text.Spanned
 import android.text.TextUtils
 import android.util.TypedValue

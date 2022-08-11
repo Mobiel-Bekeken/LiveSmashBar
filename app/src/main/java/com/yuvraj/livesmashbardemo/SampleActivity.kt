@@ -1,12 +1,12 @@
 package com.yuvraj.livesmashbardemo
 
-import android.arch.lifecycle.LifecycleOwner
-import android.arch.lifecycle.MutableLiveData
+import androidx.lifecycle.LifecycleOwner
+import androidx.lifecycle.MutableLiveData
 import android.os.Bundle
 import android.os.Handler
-import android.support.v4.content.ContextCompat
-import android.support.v7.app.AppCompatActivity
-import android.support.v7.widget.LinearLayoutManager
+import androidx.core.content.ContextCompat
+import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.yuvraj.livesmashbar.anim.AnimIconBuilder
 import com.yuvraj.livesmashbar.enums.BarStyle
 import com.yuvraj.livesmashbar.enums.DismissEvent
@@ -30,7 +30,8 @@ class SampleActivity : AppCompatActivity(), OnEventTapListener,
 
         createSamplesList();
 
-        recycler_samples.layoutManager = LinearLayoutManager(this);
+        recycler_samples.layoutManager =
+            LinearLayoutManager(this);
         recycler_samples.adapter = SampleRecyclerAdapter(this, listSamples, this);
     }
 

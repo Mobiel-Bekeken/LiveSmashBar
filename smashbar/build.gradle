@@ -1,17 +1,14 @@
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
+apply plugin: 'maven-publish'
 
 android {
-    compileSdkVersion 27 
+    compileSdkVersion 33
     defaultConfig {
-        minSdkVersion 16
-        targetSdkVersion 27
+        minSdkVersion 23
+        targetSdkVersion 33
     }
-
-    /*dataBinding{
-        enabled = true;
-    }*/
 
     buildTypes {
         release {
@@ -19,30 +16,21 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
-
 }
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
-    implementation 'com.android.support:appcompat-v7:27.1.1'
+    implementation 'androidx.appcompat:appcompat:1.5.0'
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
-    implementation "android.arch.lifecycle:livedata:1.1.1"
+    implementation 'androidx.lifecycle:lifecycle-livedata:2.5.1'
 }
 repositories {
-//    mavenCentral()
+    maven { url "https://jitpack.io" }
+    mavenCentral()
+    google()
 }
-
-//task javadoc(type: Javadoc) {
-//    excludes = ['**/*.kt'] // < ---- Exclude all kotlin files from javadoc file.
-//    // ...
-//}
 
 tasks.withType(Javadoc).all {
     enabled = false
 }
-
-//tasks.withType(Javadoc) {
-//    options.addBooleanOption('Xdoclint:none', true)
-//}
- 

@@ -1,15 +1,15 @@
 package com.yuvraj.livesmashbar.view
 
 import android.app.Activity
-import android.arch.lifecycle.LifecycleOwner
-import android.arch.lifecycle.MutableLiveData
-import android.arch.lifecycle.Observer
+import androidx.lifecycle.LifecycleOwner
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.Observer
 import android.graphics.Bitmap
 import android.graphics.PorterDuff
 import android.graphics.Typeface
 import android.graphics.drawable.Drawable
-import android.support.annotation.*
-import android.support.v4.content.ContextCompat
+import androidx.annotation.*
+import androidx.core.content.ContextCompat
 import android.text.Spanned
 import android.widget.ImageView
 import com.yuvraj.livesmashbar.DEFAULT_ICON_SCALE

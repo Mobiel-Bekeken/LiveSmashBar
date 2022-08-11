@@ -4,7 +4,7 @@ import android.animation.Animator
 import android.animation.AnimatorSet
 import android.animation.ObjectAnimator
 import android.content.Context
-import android.support.annotation.InterpolatorRes
+import androidx.annotation.InterpolatorRes
 import android.view.View
 import android.view.animation.AnticipateInterpolator
 import android.view.animation.Interpolator
@@ -110,7 +110,7 @@ class AnimBarBuilder(context: Context) : BaseSmashBarBuilder(context) {
         // Slide from left/right animation is not specified, default top/bottom
         // animation is applied
         if (direction == null) {
-            translationAnim.propertyName = "translationY"
+            translationAnim.setPropertyName("translationY")
 
             when (type) {
                 AnimType.ENTER -> when (gravity) {
@@ -121,18 +121,30 @@ class AnimBarBuilder(context: Context) : BaseSmashBarBuilder(context) {
                     GravityView.TOP -> translationAnim.setFloatValues(0f, -view!!.height.toFloat())
                     GravityView.BOTTOM -> translationAnim.setFloatValues(0f, view!!.height.toFloat())
                 }
+                null -> {
+                    //ignore
+                }
             }
         } else {
-            translationAnim.propertyName = "translationX"
+            translationAnim.setPropertyName("translationX")
 
             when (type) {
                 AnimType.ENTER -> when (direction) {
                     AnimDirection.LEFT -> translationAnim.setFloatValues(-view!!.width.toFloat(), 0f)
                     AnimDirection.RIGHT -> translationAnim.setFloatValues(view!!.width.toFloat(), 0f)
+                    null -> {
+                        //ignore
+                    }
                 }
                 AnimType.EXIT -> when (direction!!) {
                     AnimDirection.LEFT -> translationAnim.setFloatValues(0f, -view!!.width.toFloat())
                     AnimDirection.RIGHT -> translationAnim.setFloatValues(0f, view!!.width.toFloat())
+                    null -> {
+                        //ignore
+                    }
+                }
+                null -> {
+                    //ignore
                 }
             }
         }
@@ -142,12 +154,15 @@ class AnimBarBuilder(context: Context) : BaseSmashBarBuilder(context) {
 
         if (alpha) {
             val alphaAnim = ObjectAnimator()
-            alphaAnim.propertyName = "alpha"
+            alphaAnim.setPropertyName("alpha")
             alphaAnim.target = view
 
             when (type) {
                 AnimType.ENTER -> alphaAnim.setFloatValues(DEFAULT_ALPHA_START, DEFAULT_ALPHA_END)
                 AnimType.EXIT -> alphaAnim.setFloatValues(DEFAULT_ALPHA_END, DEFAULT_ALPHA_START)
+                null -> {
+                    //ignore
+                }
             }
             animators.add(alphaAnim)
         }
