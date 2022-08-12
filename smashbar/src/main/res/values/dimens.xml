@@ -17,6 +17,9 @@
     <dimen name="top_compensation_margin">16dp</dimen>
     <dimen name="bottom_compensation_margin">30dp</dimen>
 
+    <dimen name="bottom_margin">100dp</dimen>
+    <dimen name="side_margin">50dp</dimen>
+
     <dimen name="margin5">5dp</dimen>
     <dimen name="margin10">10dp</dimen>
     <dimen name="margin15">15dp</dimen>

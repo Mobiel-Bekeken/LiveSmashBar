@@ -1,5 +1,6 @@
 package com.yuvraj.livesmashbar.view
 
+import android.annotation.TargetApi
 import android.app.Activity
 import android.content.Context
 import android.graphics.Bitmap
@@ -10,15 +11,18 @@ import android.graphics.drawable.Drawable
 import android.os.Build
 import android.os.Build.VERSION.SDK_INT
 import android.os.Build.VERSION_CODES.M
-import androidx.annotation.ColorInt
 import android.text.Spanned
 import android.text.TextUtils
 import android.util.TypedValue
 import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
+import android.view.WindowInsets
 import android.widget.ImageView
 import android.widget.RelativeLayout
+import androidx.annotation.ColorInt
+import androidx.core.view.ViewCompat
+import androidx.core.view.WindowInsetsCompat
 import com.yuvraj.livesmashbar.*
 import com.yuvraj.livesmashbar.anim.AnimBarBuilder
 import com.yuvraj.livesmashbar.anim.AnimIconBuilder
@@ -32,6 +36,7 @@ import com.yuvraj.livesmashbar.lintener.OnEventListener
 import com.yuvraj.livesmashbar.lintener.OnEventShowListener
 import com.yuvraj.livesmashbar.lintener.OnEventTapListener
 import kotlinx.android.synthetic.main.bar_default_message.view.*
+
 
 /**
  * Created by Yuvraj on 29/04/18.
@@ -148,10 +153,15 @@ class BarContainerView(val activity: Context) : RelativeLayout(activity) {
             GravityView.BOTTOM -> {
 //                barViewContentLp.bottomMargin = BOTTOM_COMPENSATION_MARGIN
                 barViewLp.addRule(ALIGN_PARENT_BOTTOM)
+
+                barViewContentLp.marginStart = resources.getDimension(R.dimen.side_margin).toInt()
+                barViewContentLp.marginEnd = barViewContentLp.marginStart
+                barViewContentLp.bottomMargin = resources.getDimension(R.dimen.bottom_margin).toInt()
             }
         }
 
         val navigationBarPosition = activity.getNavigationBarPosition()
+        //navigationBarSize is not correct on Android 12
         val navigationBarSize = activity.getNavigationBarSizeInPx()
 
         when (navigationBarPosition) {
