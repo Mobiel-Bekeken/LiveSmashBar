@@ -760,7 +760,11 @@ open class LiveSmashBar(internal var builder: Builder) {
         /**
          * Shows the LiveSmashBar
          */
-        fun show() = build().show()
+        fun show() : LiveSmashBar {
+            val liveSmashBar = build()
+            liveSmashBar.show()
+            return liveSmashBar
+        }
 
         internal fun configureAnimation() {
             enterAnimBuilder =/* if (enterAnimBuilder == null) {
