@@ -66,7 +66,10 @@ class SampleActivity : AppCompatActivity(), OnEventTapListener,
     }
 
     override fun onDismissed(bar: LiveSmashBar, event: DismissEvent) {
-
+        handleItemClickAfterLiveSmashBarDismiss?.let {
+            handleItemClickAfterLiveSmashBarDismiss = null
+            onItemClick(it)
+        }
     }
 
     override fun onShowing(bar: LiveSmashBar) {
@@ -81,27 +84,38 @@ class SampleActivity : AppCompatActivity(), OnEventTapListener,
 
     }
 
+    var currentSmashBar : LiveSmashBar? = null
+    var handleItemClickAfterLiveSmashBarDismiss : Int? = null
+
     override fun onItemClick(position: Int) {
+        currentSmashBar?.let {
+            currentSmashBar = null
+            handleItemClickAfterLiveSmashBarDismiss = position
+            it.dismiss()
+            return
+        }
         when (position) {
             0 ->
-                LiveSmashBar.Builder(this)
+                currentSmashBar = LiveSmashBar.Builder(this)
                         .icon(R.mipmap.ic_launcher)
                         .title(getString(R.string.title))
                         .titleColor(ContextCompat.getColor(this, R.color.white))
                         .description(getString(R.string.description))
                         .descriptionColor(ContextCompat.getColor(this, R.color.white))
                         .gravity(GravityView.BOTTOM)
+                        .barDismissListener(this)
                         .duration(3000)
                         .show();
 
             1 ->
-                LiveSmashBar.Builder(this)
+                currentSmashBar = LiveSmashBar.Builder(this)
                         .icon(R.mipmap.ic_launcher)
                         .title(getString(R.string.title))
                         .titleColor(ContextCompat.getColor(this, R.color.white))
                         .description(getString(R.string.description))
                         .descriptionColor(ContextCompat.getColor(this, R.color.white))
                         .gravity(GravityView.BOTTOM)
+                        .barDismissListener(this)
                         .duration(3000)
                         .primaryActionText("DONE")
                         .primaryActionTextColor(ContextCompat.getColor(this, R.color.material_deep_teal_500))
@@ -113,13 +127,14 @@ class SampleActivity : AppCompatActivity(), OnEventTapListener,
                         .show();
 
             2 ->
-                LiveSmashBar.Builder(this)
+                currentSmashBar = LiveSmashBar.Builder(this)
                         .icon(R.mipmap.ic_launcher)
                         .title(getString(R.string.title))
                         .titleColor(ContextCompat.getColor(this, R.color.white))
                         .description(getString(R.string.description))
                         .descriptionColor(ContextCompat.getColor(this, R.color.white))
                         .gravity(GravityView.BOTTOM)
+                        .barDismissListener(this)
                         .backgroundColor(ContextCompat.getColor(this, R.color.material_blue_grey_900))
                         .setBarStyle(BarStyle.DIALOG)
                         .positiveActionText("DONE")
@@ -138,12 +153,13 @@ class SampleActivity : AppCompatActivity(), OnEventTapListener,
                         })
                         .show();
             3 ->
-                LiveSmashBar.Builder(this)
+                currentSmashBar = LiveSmashBar.Builder(this)
                         .showIcon()
                         .icon(R.mipmap.ic_launcher)
                         .title(getString(R.string.flutter_title))
                         .titleColor(ContextCompat.getColor(this, R.color.slate_black))
                         .description(getString(R.string.flutter_info))
+                        .barDismissListener(this)
                         .descriptionColor(ContextCompat.getColor(this, R.color.slate_black))
                         .gravity(GravityView.BOTTOM)
                         .dismissOnTapOutside()
@@ -160,6 +176,7 @@ class SampleActivity : AppCompatActivity(), OnEventTapListener,
                         .showIcon()
                         .icon(R.mipmap.ic_launcher)
                         .title(getString(R.string.flutter_title))
+                        .barDismissListener(this)
                         .titleColor(ContextCompat.getColor(this, R.color.white))
                         .description(getString(R.string.flutter_info))
                         .descriptionColor(ContextCompat.getColor(this, R.color.white))
@@ -173,19 +190,21 @@ class SampleActivity : AppCompatActivity(), OnEventTapListener,
             }
 
             5 ->
-                LiveSmashBar.Builder(this)
+                currentSmashBar = LiveSmashBar.Builder(this)
                         .icon(R.mipmap.ic_launcher)
                         .title(getString(R.string.description))
+                        .barDismissListener(this)
                         .titleColor(ContextCompat.getColor(this, R.color.white))
                         .gravity(GravityView.TOP)
                         .duration(3000)
                         .show()
 
             6 ->
-                LiveSmashBar.Builder(this)
+                currentSmashBar = LiveSmashBar.Builder(this)
                         .showIcon()
                         .icon(R.mipmap.ic_launcher)
                         .title(getString(R.string.flutter_title))
+                        .barDismissListener(this)
                         .titleColor(ContextCompat.getColor(this, R.color.white))
                         .description(getString(R.string.flutter_info))
                         .descriptionColor(ContextCompat.getColor(this, R.color.white))
@@ -201,11 +220,12 @@ class SampleActivity : AppCompatActivity(), OnEventTapListener,
                         .show()
 
             7 ->
-                LiveSmashBar.Builder(this)
+                currentSmashBar = LiveSmashBar.Builder(this)
                         .icon(R.mipmap.ic_launcher)
                         .title(getString(R.string.title))
                         .titleColor(ContextCompat.getColor(this, R.color.white))
                         .description(getString(R.string.description))
+                        .barDismissListener(this)
                         .descriptionColor(ContextCompat.getColor(this, R.color.white))
                         .gravity(GravityView.TOP)
                         .setBarStyle(BarStyle.DIALOG)
@@ -226,12 +246,13 @@ class SampleActivity : AppCompatActivity(), OnEventTapListener,
                         .show();
 
             8 ->
-                LiveSmashBar.Builder(this)
+                currentSmashBar = LiveSmashBar.Builder(this)
                         .showIcon()
                         .icon(R.mipmap.ic_launcher)
                         .title(getString(R.string.title))
                         .titleColor(ContextCompat.getColor(this, R.color.slate_black))
                         .description(getString(R.string.description))
+                        .barDismissListener(this)
                         .descriptionColor(ContextCompat.getColor(this, R.color.slate_black))
                         .gravity(GravityView.TOP)
                         .dismissOnTapOutside()
@@ -241,10 +262,11 @@ class SampleActivity : AppCompatActivity(), OnEventTapListener,
                         .show();
 
             9 ->
-                LiveSmashBar.Builder(this)
+                currentSmashBar = LiveSmashBar.Builder(this)
                         .icon(R.mipmap.ic_launcher)
                         .iconAnimation(AnimIconBuilder(this).pulse())
                         .title(getString(R.string.description))
+                        .barDismissListener(this)
                         .titleColor(ContextCompat.getColor(this, R.color.white))
                         .gravity(GravityView.TOP)
                         .duration(3000)

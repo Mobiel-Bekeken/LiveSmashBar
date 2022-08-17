@@ -135,6 +135,9 @@ class BarContainerView(val activity: Context) : RelativeLayout(activity) {
             if (overlayBlockable) {
                 isClickable = true
                 isFocusable = true
+                val parentView = relative_root.parent as? View
+                parentView?.isClickable = true
+                parentView?.isFocusable = true
             }
         }
     }
@@ -250,9 +253,10 @@ class BarContainerView(val activity: Context) : RelativeLayout(activity) {
                 isBarDismissing = false
                 isBarShown = false
 
-                onBarDismissListener?.onDismissed(liveSmashBar, event)
-
-                post { (parent as? ViewGroup)?.removeView(this@BarContainerView) }
+                post {
+                    (parent as? ViewGroup)?.removeView(this@BarContainerView)
+                    onBarDismissListener?.onDismissed(liveSmashBar, event)
+                }
             }
         })
     }
